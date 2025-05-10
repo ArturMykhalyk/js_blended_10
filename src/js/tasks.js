@@ -1,5 +1,10 @@
-import { saveTaskLocaleStorage } from './local-storage-api';
+import {
+  saveTaskLocaleStorage,
+  deleteTaskLocaleStorage,
+} from './local-storage-api';
 import { nanoid } from 'nanoid';
+import { renderMarkupTask } from './render-tasks';
+
 export function handleAddTask(event) {
   event.preventDefault();
 
@@ -10,7 +15,16 @@ export function handleAddTask(event) {
   };
 
   saveTaskLocaleStorage(task);
-  console.log(task);
+  renderMarkupTask(task);
 
   event.target.reset();
+}
+
+export function handleDeleteTask(event) {
+  if (event.target.nodeName !== 'BUTTON') {
+    return;
+  }
+  event.target.parentElement.remove();
+  const deleteTaskId = event.target.parentElement.dataset.id;
+  deleteTaskLocaleStorage(deleteTaskId);
 }

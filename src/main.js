@@ -8,14 +8,21 @@
   Список із завданнями має бути доступним після перезавантаження сторінки.
 
   Розмітка картки задачі
-  <li class="task-list-item">
-      <button class="task-list-item-btn">Delete</button>
-      <h3>Заголовок</h3>
-      <p>Текст</p>
-  </li>
+e
 */
-import { initialTaskLocaleStorage } from './js/local-storage-api';
-import { handleAddTask } from './js/tasks';
+import {
+  initialTaskLocaleStorage,
+  getTasksLocaleStorage,
+} from './js/local-storage-api';
+import { handleAddTask, handleDeleteTask } from './js/tasks';
 import { refs } from './js/refs';
+import { renderMarkupTasks } from './js/render-tasks';
+import { handleChangeTheme } from './js/theme-switcher';
+import { startTheme } from './js/theme-switcher';
 initialTaskLocaleStorage();
+renderMarkupTasks(getTasksLocaleStorage());
+startTheme();
+
 refs.taskFormEl.addEventListener('submit', handleAddTask);
+refs.taskListEl.addEventListener('click', handleDeleteTask);
+refs.changeTheme.addEventListener('click', handleChangeTheme);
