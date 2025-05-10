@@ -14,3 +14,8 @@
       <p>Текст</p>
   </li>
 */
+import { initialTaskLocaleStorage } from './js/local-storage-api';
+import { handleAddTask } from './js/tasks';
+import { refs } from './js/refs';
+initialTaskLocaleStorage();
+refs.taskFormEl.addEventListener('submit', handleAddTask);
